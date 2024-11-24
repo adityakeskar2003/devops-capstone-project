@@ -69,6 +69,12 @@ def create_accounts():
 ######################################################################
 
 # ... place you code here to READ an account ...
+@app.route('/accounts/<int:id>', methods=['GET'])
+def read_account(id):
+    account = Account.find(id)  # Assuming find method fetches account by ID
+    if not account:
+        abort(404, description="Account not found")
+    return jsonify(account.serialize()), 200
 
 
 ######################################################################
